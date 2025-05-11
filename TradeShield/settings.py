@@ -37,6 +37,7 @@ INSTALLED_APPS = [
 
     # LOCAL APPS
     'authentication',
+    'shipping_routes',
 ]
 
 MIDDLEWARE = [
