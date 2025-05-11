@@ -9,7 +9,7 @@ class GeminiService:
             raise ValueError("GEMINI_API_KEY environment variable is not set")
 
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-pro')
+        self.model = genai.GenerativeModel('gemini-2.0-flash')
 
     def get_shipping_route_points(self, origin, destination, product):
         prompt = f"""
