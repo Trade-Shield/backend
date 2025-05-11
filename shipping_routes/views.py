@@ -1,5 +1,5 @@
-import json
-from rest_framework import viewsets, status
+from rest_framework import status, mixins
+from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import ShippingRouteQuery, RoutePoint
@@ -7,14 +7,16 @@ from .serializers import ShippingRouteQuerySerializer, ShippingRouteRequestSeria
 from .services.gemini_service import GeminiService
 
 
-class ShippingRouteViewSet(viewsets.ModelViewSet):
+class ShippingRouteViewSet(mixins.RetrieveModelMixin,
+                           mixins.ListModelMixin,
+                           GenericViewSet):
     serializer_class = ShippingRouteQuerySerializer
 
     def get_queryset(self):
         return ShippingRouteQuery.objects.filter(user=self.request.user)
 
     @action(detail=False, methods=['post'])
-    def analyze_route(self, request):
+    def analyze(self, request):  # analyze route
         serializer = ShippingRouteRequestSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
