@@ -38,8 +38,6 @@ class ShippingRouteViewSet(mixins.RetrieveModelMixin,
             gemini_service = GeminiService()
             response_text = gemini_service.get_shipping_route_points(origin, destination, product)
 
-            print(response_text)
-
             try:
                 json_str = response_text
 
