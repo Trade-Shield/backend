@@ -2,6 +2,8 @@ import os
 from datetime import timedelta
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +23,8 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 ALLOWED_HOSTS = []
+
+load_dotenv()
 
 # Application definition
 
