@@ -5,7 +5,7 @@ from .models import ShippingRouteQuery, RoutePoint
 class RoutePointSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoutePoint
-        fields = ['id', 'name', 'description', 'order']
+        fields = ['id', 'name', 'description', 'order', 'point_type', 'country', 'city']
 
 
 class ShippingRouteQuerySerializer(serializers.ModelSerializer):
@@ -14,8 +14,8 @@ class ShippingRouteQuerySerializer(serializers.ModelSerializer):
     class Meta:
         model = ShippingRouteQuery
         fields = ['id', 'created_at', 'origin_country', 'destination_country',
-                  'product_name', 'route_points']
-        read_only_fields = ['id', 'created_at', 'route_points']
+                  'product_name', 'transport_method', 'route_points']
+        read_only_fields = ['id', 'created_at', 'route_points', 'transport_method']
 
 
 class ShippingRouteRequestSerializer(serializers.Serializer):

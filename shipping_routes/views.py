@@ -48,12 +48,20 @@ class ShippingRouteViewSet(mixins.RetrieveModelMixin,
 
                 route_data = json.loads(json_str)
 
+                query.transport_method = route_data.get('transport_method', '')
+                query.save()
+
                 for i, point_data in enumerate(route_data.get('route_points', [])):
+                    location = point_data.get('location', {})
+
                     RoutePoint.objects.create(
                         shipping_query=query,
                         name=point_data.get('name', ''),
                         description=point_data.get('description', ''),
-                        order=i
+                        order=i,
+                        point_type=point_data.get('type', 'transit'),
+                        country=location.get('country', ''),
+                        city=location.get('city', '')
                     )
 
                 return Response(
